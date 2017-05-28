@@ -1,0 +1,55 @@
+body {
+    background-color: gray;
+}
+
+#container {
+    border: 2px solid black;
+    clear: both;
+    text-align: center;
+}
+
+#logo {
+    display: table;
+}
+
+#title {
+    border: 2px solid black;
+    text-align: center;
+}
+
+#filmbox {
+    clear: both;
+    padding: 40px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+#filmboxcontent {
+    border: 2px solid black;
+    height: 300px;
+}
+
+#poster {
+    float: left;
+    height: 300px;
+    border-right: 2px solid black;
+}
+
+#hours {
+    float: right;
+    text-align: left;
+    height: 300px;
+    width: 300px;
+    display: inline;
+}
+
+#hour {
+    margin-right: 15px;
+    color: black;
+}
+
+#footer {
+    clear: both;
+    border-top: 2px solid grey;
+    text-align: center;
+}
