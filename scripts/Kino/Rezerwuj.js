@@ -25,12 +25,27 @@ function Reserve() { // obiekt guzika rezerwuj
         slid.parent("slider");
         slid.position(width / 2 - slid.width / 2, this.pos.y + 15);
     }
+
     this.ChangeSliderValue = function(value) {
         var free = 96 - booked;
-        if (value > 0) {
-            // if (slider)
-        } else if (value < 0) {
+        var actuall = slid.value();
 
+        if (value == 1) {
+            if (actuall < free) {
+                slid.value(actuall + 1);
+            }
+        } else if (value == -1) {
+            if (actuall > 0) {
+                slid.value(actuall - 1);
+            }
+        } else if (value > 0) {
+            if (value < (free - actuall)) {
+                slid.value(value + actuall);
+            }
+        } else if (value < 0) {
+            if (abs(value) < actuall) {
+                slid.value(actuall - value);
+            }
         }
     }
 
@@ -66,10 +81,6 @@ function Reserve() { // obiekt guzika rezerwuj
             this.clicked = false;
             return false;
         }
-    }
-
-    this.InteligentReservation = function() {
-
     }
 
     this.Show = function() {

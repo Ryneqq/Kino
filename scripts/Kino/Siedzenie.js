@@ -2,19 +2,31 @@ function Siedzenie() {
     this.pos = createVector();
     this.taken = false;
     this.text;
+    this.dist;
+    this.index;
 
     this.highlighted = false;
     this.clicked = false;
 
+
     this.Set = function(x, y, t) {
         this.pos = createVector(x, y);
         this.text = t;
+        this.index = t - 1;
+        this.dist = -1;
     }
 
     this.Book = function() {
         this.taken = true;
         this.highlighted = false;
         this.clicked = false;
+    }
+
+    this.Distance = function() {
+        return this.dist;
+    }
+    this.Distance = function(d) {
+        this.dist = d
     }
 
     this.Highlight = function() {
@@ -31,6 +43,7 @@ function Siedzenie() {
     this.Click = function() {
         if (this.highlighted) {
             this.clicked = true;
+            reservation.ChangeSliderValue(1);
             return true;
         }
     }

@@ -7,6 +7,8 @@ var error; // dane nie widnieja w bazie danych - zabezpieczenie przed zmiana que
 var resKey; // klucz rezerwacji - indywidualny klucz generowany przez baze, posłóży do odbioru biletów
 var gotdata; // prawda jeżeli dane zostały załadowane
 var booked = 0; // int w którym trzymam liczbe siedzen zajetych
+var clickedSeats = 0; // int w którym trzymam liczbe kliknietych siedzen, slozy do porownania ze sliderem
+var alg;
 
 function setup() {
     // połącz się z bazą danych
@@ -20,6 +22,8 @@ function setup() {
     CreateSeats();
     reservation = new Reserve();
     increase = new Increase();
+    alg = new NNAlgorithm();
+    //alg.FindKNN(10);
 }
 
 function CreateBase(params) {
@@ -46,12 +50,16 @@ function CreateSeats() {
 function draw() {
     background(192);
     if (!error && !resKey) {
+        clickedSeats = 0;
         for (var i = 0; i < seat.length; i++) {
             seat[i].Show();
         }
         ShowScreen();
         reservation.Show();
         increase.Show();
+        if (gotdata) {
+            Intel_Res();
+        }
     } else if (error) {
         if (slid)
             slid.remove();
@@ -115,6 +123,7 @@ function ShowKey() {
 
 
 function CheckPosition(x, y) {
+    clickedSeats = 0;
     for (var i = 0; i < seat.length; i++) {
         seat[i].Highlight();
     }
@@ -140,9 +149,38 @@ function CheckClick() {
 
 function ResetClick() {
     for (var i = 0; i < seat.length; i++) {
-        if (seat[i].Highlight())
+        if (seat[i].Highlight()) {
             seat[i].clicked = false;
+            reservation.ChangeSliderValue(-1);
+        }
     }
+}
+
+function Intel_Res() {
+    clickedSeats = 0;
+    for (var i = 0; i < seat.length; i++) {
+        if (seat[i].clicked) {
+            clickedSeats++;
+        }
+    }
+    //console.log("liczba miejsc " + clickedSeats);
+    //console.log("wartosc slidera " + slid.value());
+
+    if (clickedSeats < slid.value()) {
+        alg.FindKNN(slid.value());
+    }
+
+    if (clickedSeats > slid.value()) {
+        alg.Unfind(slid.value());
+        alg.count = slid.value();
+    }
+
+    if (slid.value() == 0) {
+        alg.Clear();
+    }
+
+
+
 }
 
 // funkcja wywoływana przez obiekt baza by zabierane siedzenia były updateowane

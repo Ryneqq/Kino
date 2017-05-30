@@ -95,7 +95,6 @@ function Base() {
                 }
                 console.log("number of seats booked: " + booked);
                 reservation.UpdateSlider();
-                slid.value(slid.value() + 1);
 
             } else {
                 error = true;

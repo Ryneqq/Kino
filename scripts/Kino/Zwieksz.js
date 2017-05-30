@@ -35,19 +35,14 @@ function Increase() {
     this.Click = function() {
         if (this.increase_highlighted) {
             this.increase_clicked = true;
+            reservation.ChangeSliderValue(1);
         } else if (this.decrease_highlighted) {
             this.decrease_clicked = true;
+            reservation.ChangeSliderValue(-1);
         } else {
             this.increase_clicked = false;
             this.decrease_clicked = false;
         }
-        /*
-                if (this.decrease_highlighted) {
-                    this.decrease_clicked = true;
-                } else {
-                    this.decrease_clicked = false;
-                }
-                */
     }
 
     this.Increase_Show = function() {
