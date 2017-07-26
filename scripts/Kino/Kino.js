@@ -9,6 +9,7 @@ var gotdata; // prawda jeżeli dane zostały załadowane
 var booked = 0; // int w którym trzymam liczbe siedzen zajetych
 var clickedSeats = 0; // int w którym trzymam liczbe kliknietych siedzen, slozy do porownania ze sliderem
 var alg;
+//var slidvalue;
 
 function setup() {
     // połącz się z bazą danych

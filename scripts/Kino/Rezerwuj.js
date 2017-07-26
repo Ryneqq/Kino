@@ -29,6 +29,7 @@ function Reserve() { // obiekt guzika rezerwuj
     this.ChangeSliderValue = function(value) {
         var free = 96 - booked;
         var actuall = slid.value();
+        //slidvalue = actuall;
 
         if (value == 1) {
             if (actuall < free) {

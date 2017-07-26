@@ -94,6 +94,8 @@ function NNAlgorithm() {
                 k++;
             }
         }
+        this.reserve = null;
+        this.start = null;
     }
 
     this.FindKNN = function(k) {
@@ -125,12 +127,21 @@ function NNAlgorithm() {
         }
     }
 
-    this.Unfind = function(k) {
-        for (var i = k; i > this.count; i--) {
-            this.reserve[i].clicked = false;
-            //console.log(this.reserve[i]);
-            clickedSeats -= 1;
-            //reservation.ChangeSliderValue(-1);
+    this.Unfind = function() {
+        // for (var i = k; i > this.count; i--) {
+        //     this.reserve[i].clicked = false;
+        //     //console.log(this.reserve[i]);
+        //     clickedSeats -= 1;
+        //     //reservation.ChangeSliderValue(-1);
+        // }
+        if (this.reserve) {
+            for (var i = 0; i < this.reserve.length; i++) {
+                this.reserve[i].clicked = false;
+            }
         }
+        var start = this.start;
+        this.Clear();
+        this.start = start;
+        this.FindKNN(slid.value());
     }
 }
